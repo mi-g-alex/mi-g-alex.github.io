@@ -1,14 +1,52 @@
-<DOCTYPE html></DOCTYPE>
-<html lang="ru">
+<!DOCTYPE HTML>
+<html>
 <head>
-    <script src="js/1.js"></script>
-    <title>Hello</title>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var temperatureTime = [];
+            var humidityTime = [];
+            var cO2Time = [];
+            var cH4Time = [];
+            // var chart = new CanvasJS.Chart("chartContainer",{
+            //     title:{
+            //         text:"Rendering Chart with dataPoints from External JSON"
+            //     },
+            //     data: [{
+            //         type: "line",
+            //         dataPoints : dataPoints,
+            //     }]
+            // });
+            // $.getJSON("https://canvasjs.com/services/data/datapoints.php?xstart=1&ystart=10&length=100&type=json", function(data) {
+            //     $.each(data, function(key, value){
+            //         dataPoints.push({x: value[0], y: parseInt(value[1])});
+            //         temperatureTime.push({x: value[0], y: parseInt(value[1])})
+            //         humidityTime.push({x: value[0], y: parseInt(value[2])})
+            //         cO2Time.push({x: value[0], y: parseInt(value[3])})
+            //         cH4Time.push({x: value[0], y: parseInt(value[4])})
+            //     });
+            //     chart.render();
+            // });
+
+            // $.getJSON("https://airqualityapi-georga399.amvera.io/api/RawData/getforday/20-10-2023", function(data) {
+            //     console.log(data)
+            // });
+
+            fetch('https://airqualityapi-georga399.amvera.io/api/RawData/getforday/20-10-2023', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                },
+            })
+                .then(response => response.json())
+                .then(response => console.log(JSON.stringify(response)))
+
+        }
+    </script>
+
 </head>
 <body>
-<button onclick="revealMessage()">Click me!</button>
-<div id="hiddenMessage" style="display:none">
-    <p>You are going on a cruise</p>
-    <button id="countDownButton" onclick="countDown()">10</button>
-</div>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
 </body>
 </html>
